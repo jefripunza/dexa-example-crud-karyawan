@@ -9,45 +9,15 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: ✅ Use Node.js 14
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-
-      - name: 🕓 Delayed 10 Second
-        run: |
-          sleep 10
-
-      - name: 🌊 Install Dependencies
-        run: |
-          npm install
-
-      - name: ⚒️ Build
-        run: |
-          npm run build
-
       - name: 🚫 Remove Meta Files & Folders
         run: |
           rm -rf .github
-          rm -rf node_modules
-          rm -rf src
           rm .gitignore
           rm dexa-training.postman_collection.json
-          rm nodemon.json
           rm package-lock.json || true
-          rm package.json
           rm README.md
           rm soal_test.js
           rm yarn.lock || true
-
-      - name: 📁 Top Level Change
-        run: |
-          mv -v ./dist/* ./
-          rm -rf dist
-
-      - name: 🔣 Rename index.js to app.js
-        run: |
-          mv index.js app.js
 
       - name: 💯 Configuration for Production
         run: |
@@ -57,7 +27,7 @@ jobs:
       - name: 💾 Sync files to Server 📡
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ftp.partnerku.online
+          server: ftp.jefriherditriyanto.com
           username: ${{secrets.ftp_email}}
           password: ${{secrets.ftp_password}}
           exclude: |
