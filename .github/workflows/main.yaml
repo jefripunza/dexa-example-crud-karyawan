@@ -50,14 +50,17 @@ jobs:
       - name: 💯 Configuration for Production
         run: |
           sed -i 's/DB_SYNC=true/DB_SYNC=false/g' .env
-          sed -i 's/jefriherditriyanto.com/localhost/g' .env
+          sed -i 's/database_host/localhost/g' .env
+          sed -i 's/database_username/${{secrets.db_user}}/g' .env
+          sed -i 's/database_password/${{secrets.db_pass}}/g' .env
+          sed -i 's/database_name/${{secrets.db_name}}/g' .env
 
       - name: 💾 Sync files to Server 📡
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ftp.partnerku.online
-          username: ${{ secrets.ftp_email }}
-          password: ${{ secrets.ftp_password }}
+          username: ${{secrets.ftp_email}}
+          password: ${{secrets.ftp_password}}
           exclude: |
             **/.git*
             **/.git*/**
