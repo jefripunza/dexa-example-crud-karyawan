@@ -17,7 +17,7 @@
       "description": "API untuk management karyawan"
     }
   ],
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
