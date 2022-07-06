@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "ccbf6eb1-3e4d-48e8-b450-7cfcdc23950b",
+		"name": "dexa-training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19204359"
+	},
+	"item": [
+		{
+			"name": "karyawan",
+			"item": [
+				{
+					"name": "tambah karyawan",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"email\", \"jefripunza@gmail.com\")\r",
+									"pm.globals.set(\"password\", \"ninuninu\")"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"jefripunza\",\r\n    \"gender\": \"pria\",\r\n    \"dob\": \"2012-12-12\",\r\n    \"phone_number\": \"082214252455\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"religion\": \"bismilah\",\r\n    \"marital_status\": \"nikah\",\r\n    \"address\": \"Ds Sungai Mas, RT 013 RW 006, Rasau, Renah Pamenang, Merangin, Jambi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/karyawan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list karyawan (pagination)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"console.log(response)\r",
+									"if (response.data) {\r",
+									"    if (response.data.length > 0) {\r",
+									"        pm.globals.set(\"id\", response.data[0].id)\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/karyawan/20/1/desc/'",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"karyawan",
+								"20",
+								"1",
+								"desc",
+								"'"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit karyawan",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"email\", \"jefriherditriyanto@gmail.com\")\r",
+									"pm.globals.set(\"password\", \"wakwaw\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{id}},\r\n    \"name\": \"Jefri Herdi Triyanto\",\r\n    \"gender\": \"pria\",\r\n    \"dob\": \"1996-01-14\",\r\n    \"phone_number\": \"085156573257\",\r\n    \"email\": \"jefriherditriyanto@gmail.com\",\r\n    \"password\": \"wakwaw\",\r\n    \"religion\": \"islam\",\r\n    \"marital_status\": \"belum nikah\",\r\n    \"address\": \"Ds Sungai Mas, RT 013 RW 006, Rasau, Renah Pamenang, Merangin, Jambi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/karyawan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hapus karyawan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/karyawan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "help",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const { token, expired } = pm.response.json()\r",
+									"if (token && expired) {\r",
+									"    pm.globals.set(\"token\", token)\r",
+									"    pm.globals.set(\"expired\", expired)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const { token, expired } = pm.response.json()\r",
+									"if (token && expired) {\r",
+									"    pm.globals.set(\"token\", token)\r",
+									"    pm.globals.set(\"expired\", expired)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test forbiden",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/wakwaw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"wakwaw"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
