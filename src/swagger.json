@@ -69,6 +69,12 @@
         "description": "mengubah karyawan yang sudah ada didalam database",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth bearer token"
+          },
+          {
             "name": "update",
             "in": "body",
             "schema": {
@@ -109,6 +115,12 @@
         "description": "menghapus karyawan yang ada didalam database",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth bearer token"
+          },
+          {
             "name": "delete",
             "in": "body",
             "schema": {
@@ -134,6 +146,12 @@
     },
     "/api/karyawan/{show}/{page}/{order_by}/{keyword}": {
       "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header",
+          "type": "string",
+          "description": "auth bearer token"
+        },
         {
           "name": "show",
           "in": "path",
