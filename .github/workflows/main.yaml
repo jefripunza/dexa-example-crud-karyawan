@@ -32,10 +32,12 @@ jobs:
           rm -rf node_modules
           rm -rf src
           rm .gitignore
+          rm dexa-training.postman_collection.json
           rm nodemon.json
           rm package-lock.json || true
           rm package.json
           rm README.md
+          rm soal_test.js
           rm yarn.lock || true
 
       - name: 📁 Top Level Change
