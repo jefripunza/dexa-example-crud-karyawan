@@ -13,6 +13,10 @@
   "basePath": "/",
   "tags": [
     {
+      "name": "Auth",
+      "description": "kebutuhan dalam autentikasi"
+    },
+    {
       "name": "Karyawan",
       "description": "API untuk management karyawan"
     }
@@ -21,6 +25,85 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "validasi data dan mendapatkan token",
+        "tags": ["Auth"],
+        "description": "validasi data dan mendapatkan token baru",
+        "parameters": [
+          {
+            "name": "input",
+            "in": "body",
+            "schema": {
+              "$ref": "#/request/login"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "karyawan berhasil login",
+            "schema": {
+              "$ref": "#/response/login"
+            }
+          },
+          "400": {
+            "description": "email / password salah",
+            "schema": {
+              "$ref": "#/response/only_message"
+            }
+          },
+          "500": {
+            "description": "error server",
+            "schema": {
+              "$ref": "#/response/only_message"
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "get": {
+        "summary": "memperbarui token baru jika token lama masih aktif",
+        "tags": ["Auth"],
+        "description": "memperbarui token baru jika token lama masih aktif",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth bearer token"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "berhasil refresh token",
+            "schema": {
+              "$ref": "#/response/login"
+            }
+          },
+          "401": {
+            "description": "token tidak valid",
+            "schema": {
+              "$ref": "#/response/only_message"
+            }
+          },
+          "403": {
+            "description": "token bearer dibutuhkan",
+            "schema": {
+              "$ref": "#/response/only_message"
+            }
+          },
+          "500": {
+            "description": "error server",
+            "schema": {
+              "$ref": "#/response/only_message"
+            }
+          }
+        }
+      }
+    },
     "/api/karyawan": {
       "post": {
         "summary": "menambah karyawan",
@@ -214,6 +297,17 @@
     }
   },
   "request": {
+    "login": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "insert": {
       "required": [
         "name",
@@ -318,6 +412,17 @@
     }
   },
   "response": {
+    "login": {
+      "required": ["token", "expired"],
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "expired": {
+          "type": "string"
+        }
+      }
+    },
     "pagination": {
       "required": [
         "data",

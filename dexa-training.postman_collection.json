@@ -238,14 +238,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/login",
+							"raw": "http://localhost:8080/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"api",
+								"auth",
 								"login"
 							]
 						}
@@ -283,14 +283,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/refresh-token",
+							"raw": "http://localhost:8080/auth/refresh-token",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"api",
+								"auth",
 								"refresh-token"
 							]
 						}

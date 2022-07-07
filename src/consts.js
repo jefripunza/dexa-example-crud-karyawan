@@ -11,4 +11,4 @@ exports.maritals = ["nikah", "belum nikah"];
 
 exports.skip_token = false;
 
-exports.expired_token = 1; // minute
+exports.expired_token = 3; // minute
