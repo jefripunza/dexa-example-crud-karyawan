@@ -222,51 +222,61 @@ exports.update = async ({
     }
 
     // check apakah format dob adalah Date
-    const train_dob = String(dob).split("-");
-    const isDob =
-      train_dob.length === 3 &&
-      train_dob[0].length === 4 &&
-      train_dob[1].length === 2 &&
-      train_dob[2].length === 2 &&
-      train_dob.map((n) => parseInt(n)).filter((n) => n).length === 3;
-    if (!isDob) {
-      console.log(`dob "${dob}" bukan format date (YYYY-MM-DD)`);
-      return {
-        code: 400,
-        message: `dob "${dob}" bukan format date (YYYY-MM-DD)`,
-      };
+    if (dob) {
+      const train_dob = String(dob).split("-");
+      const isDob =
+        train_dob.length === 3 &&
+        train_dob[0].length === 4 &&
+        train_dob[1].length === 2 &&
+        train_dob[2].length === 2 &&
+        train_dob.map((n) => parseInt(n)).filter((n) => n).length === 3;
+      if (!isDob) {
+        console.log(`dob "${dob}" bukan format date (YYYY-MM-DD)`);
+        return {
+          code: 400,
+          message: `dob "${dob}" bukan format date (YYYY-MM-DD)`,
+        };
+      }
     }
 
     // check apakah email adalah benar format email
-    if (!isEmail(email)) {
-      console.log(`email "${email}" bukan format email`);
-      return {
-        code: 400,
-        message: `email "${email}" bukan format email`,
-      };
+    if (email) {
+      if (!isEmail(email)) {
+        console.log(`email "${email}" bukan format email`);
+        return {
+          code: 400,
+          message: `email "${email}" bukan format email`,
+        };
+      }
     }
 
     // check apakah gender tersedia
-    if (!genders.includes(gender)) {
-      console.log(`gender "${gender}" tidak tersedia (${genders.join(", ")})`);
-      return {
-        code: 400,
-        message: `gender "${gender}" tidak tersedia (${genders.join(", ")})`,
-      };
+    if (gender) {
+      if (!genders.includes(gender)) {
+        console.log(
+          `gender "${gender}" tidak tersedia (${genders.join(", ")})`
+        );
+        return {
+          code: 400,
+          message: `gender "${gender}" tidak tersedia (${genders.join(", ")})`,
+        };
+      }
     }
     // check apakah gender tersedia
-    if (!maritals.includes(marital_status)) {
-      console.log(
-        `marital_status "${marital_status}" tidak tersedia (${maritals.join(
-          ", "
-        )})`
-      );
-      return {
-        code: 400,
-        message: `marital_status "${marital_status}" tidak tersedia (${maritals.join(
-          ", "
-        )})`,
-      };
+    if (marital_status) {
+      if (!maritals.includes(marital_status)) {
+        console.log(
+          `marital_status "${marital_status}" tidak tersedia (${maritals.join(
+            ", "
+          )})`
+        );
+        return {
+          code: 400,
+          message: `marital_status "${marital_status}" tidak tersedia (${maritals.join(
+            ", "
+          )})`,
+        };
+      }
     }
 
     // check apakah data yang ingin di update sekarang ini ada di database
