@@ -296,7 +296,7 @@ exports.update = async ({
       dob,
       phone_number,
       email,
-      password: encryption.encode(password),
+      password: password ? encryption.encode(password) : undefined,
       religion,
       marital_status,
       address,
