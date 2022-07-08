@@ -4,6 +4,11 @@
     "version": "1.0.0",
     "title": "Dexa Group Training",
     "description": "project ini menggunakan NodeJS",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Jefri Herdi Triyanto",
+      "email": "jefriherditriyanto@gmail.com"
+    },
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -64,17 +69,11 @@
     },
     "/auth/refresh-token": {
       "get": {
+        "security": [{ "Bearer": [] }],
         "summary": "memperbarui token baru jika token lama masih aktif",
         "tags": ["Auth"],
         "description": "memperbarui token baru jika token lama masih aktif",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "type": "string",
-            "description": "auth bearer token"
-          }
-        ],
+        "parameters": [],
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -106,6 +105,7 @@
     },
     "/api/karyawan": {
       "post": {
+        "security": [{ "Bearer": [] }],
         "summary": "menambah karyawan",
         "tags": ["Karyawan"],
         "description": "menambah karyawan baru",
@@ -147,16 +147,11 @@
         }
       },
       "patch": {
+        "security": [{ "Bearer": [] }],
         "summary": "mengubah karyawan",
         "tags": ["Karyawan"],
         "description": "mengubah karyawan yang sudah ada didalam database",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "type": "string",
-            "description": "auth bearer token"
-          },
           {
             "name": "update",
             "in": "body",
@@ -193,16 +188,11 @@
         }
       },
       "delete": {
+        "security": [{ "Bearer": [] }],
         "summary": "menghapus karyawan",
         "tags": ["Karyawan"],
         "description": "menghapus karyawan yang ada didalam database",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "type": "string",
-            "description": "auth bearer token"
-          },
           {
             "name": "delete",
             "in": "body",
@@ -229,12 +219,6 @@
     },
     "/api/karyawan/{show}/{page}/{order_by}/{keyword}": {
       "parameters": [
-        {
-          "name": "Authorization",
-          "in": "header",
-          "type": "string",
-          "description": "auth bearer token"
-        },
         {
           "name": "show",
           "in": "path",
@@ -265,6 +249,7 @@
         }
       ],
       "get": {
+        "security": [{ "Bearer": [] }],
         "tags": ["Karyawan"],
         "summary": "tampilkan data karyawan (pagination)",
         "responses": {
@@ -499,6 +484,14 @@
           "type": "string"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter your bearer token in the format **Bearer &lt;token>**"
     }
   }
 }
