@@ -105,7 +105,6 @@
     },
     "/api/karyawan": {
       "post": {
-        "security": [{ "Bearer": [] }],
         "summary": "menambah karyawan",
         "tags": ["Karyawan"],
         "description": "menambah karyawan baru",
